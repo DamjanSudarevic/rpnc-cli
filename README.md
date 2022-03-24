@@ -10,7 +10,8 @@ Reverse Polish notation (RPN) is a method for representing expressions
 in which the operator symbol is placed after the arguments being operated on.
 
 For example a sum of numbers 2 and 3 would look something like this in RPN:
-2 3 +
+-> 2 3 + 
+<- 5
 
 RPN has the property that brackets are not required to represent the order
 of evaluation or grouping of the terms.
@@ -18,7 +19,18 @@ RPN expressions are simply evaluated from left to right and this greatly
 simplifies the computation of the expression.
 
 For example the arithmetic expression (3 + 4) * 5 can be expressed like this:
-3 4 + 5 *
+-> 3 4 + 5 * 
+-> 7 * 5
+<- 35
+
+Operators supported:
++  (addition)         -> adds 2 numbers together
+-  (subtraction)      -> subtracts one number from the other
+*  (multiplication)   -> multiplies 2 numbers
+** (power)            -> raises one number to the power of the second
+/  (division)         -> divides one number by another
+// (floored division) -> same as division but returns floored value
+%  (remainder or mod) -> returns remainder of rounded division
 
 rpnc-cli also has support for constants such as (not case sensitive):
 PI      -> 3.14159265...
