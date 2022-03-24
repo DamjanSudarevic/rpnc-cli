@@ -20,6 +20,14 @@ simplifies the computation of the expression.
 For example the arithmetic expression (3 + 4) * 5 can be expressed like this:
 3 4 + 5 *
 
+rpnc-cli also has support for constants such as (not case sensitive):
+PI      -> 3.14159265...
+E       -> 2.71828182...
+LOG2E   -> log of e base 2
+LOG10E  -> log of e base 10
+LN2     -> log of 2 base e
+LN10    -> log of 10 base e
+
 Sources:
 Reverse Polish Notation
 - https://mathworld.wolfram.com/ReversePolishNotation.html

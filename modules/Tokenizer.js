@@ -3,7 +3,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Tokenizer_instances, _Tokenizer_isNumber, _Tokenizer_isOperator;
+var _Tokenizer_instances, _Tokenizer_isNumber, _Tokenizer_isOperator, _Tokenizer_isConstant;
 const Operators = {
     "+": (a, b) => (a + b),
     "-": (a, b) => (b - a),
@@ -12,13 +12,26 @@ const Operators = {
     "%": (a, b) => (b % a),
     "//": (a, b) => Math.round(b / a)
 };
-export { Operators };
+const Constants = {
+    "PI": Math.PI,
+    "E": Math.E,
+    "LOG2E": Math.LOG2E,
+    "LOG10E": Math.LOG10E,
+    "LN2": Math.LN2,
+    "LN10": Math.LN10
+};
 export default class Tokenizer {
     constructor() {
         _Tokenizer_instances.add(this);
     }
     TokenizeList(list) {
         return list.map((element) => {
+            if (__classPrivateFieldGet(this, _Tokenizer_instances, "m", _Tokenizer_isConstant).call(this, element)) {
+                return {
+                    type: "Constant",
+                    value: Constants[element.toUpperCase()]
+                };
+            }
             if (__classPrivateFieldGet(this, _Tokenizer_instances, "m", _Tokenizer_isNumber).call(this, element)) {
                 return {
                     type: "Integer",
@@ -39,6 +52,9 @@ export default class Tokenizer {
             if (token === null)
                 return;
             switch (token.type) {
+                case "Constant":
+                    stack.push(token.value);
+                    break;
                 case "Integer":
                     stack.push(token.value);
                     break;
@@ -61,4 +77,6 @@ _Tokenizer_instances = new WeakSet(), _Tokenizer_isNumber = function _Tokenizer_
     return !isNaN(maybeNumber);
 }, _Tokenizer_isOperator = function _Tokenizer_isOperator(value) {
     return value in Operators;
+}, _Tokenizer_isConstant = function _Tokenizer_isConstant(value) {
+    return value.toUpperCase() in Constants;
 };
