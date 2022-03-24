@@ -1,2 +1,4 @@
 **/*.ts
 **/node_modules
+
+gitpush.bat
