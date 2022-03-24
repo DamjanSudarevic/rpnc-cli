@@ -1,7 +1,7 @@
 {
   "name": "rpcn-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "rpnc-cli is a basic cli calculator using Reverse Polish Notation (RPN)",
   "main": "main.js",
   "type": "module",
   "scripts": {
